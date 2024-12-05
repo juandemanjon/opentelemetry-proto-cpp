@@ -1,0 +1,11 @@
+{
+    "packages": [
+      "go@1.22.0",
+      "buf@latest",
+      "bazelisk@latest",
+      "buildifier@latest"
+    ],
+    "shell": {
+      "init_hook": ["alias bazel='bazelisk'", "export PATH=$HOME/bin:$PATH"]
+    }
+  }
