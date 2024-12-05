@@ -1,0 +1,47 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "common_proto",
+    srcs = [
+        #"@com_github_opentelemetry_proto//:opentelemetry/proto/common/v1/common.proto",
+        "opentelemetry/proto/common/v1/common.proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+cc_proto_library(
+    name = "common_proto_cc",
+    deps = [":common_proto"],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "resource_proto",
+    srcs = [
+        "opentelemetry/proto/resource/v1/resource.proto",
+    ],
+    deps = [":common_proto"],
+    visibility = ["//visibility:public"],
+)
+
+cc_proto_library(
+    name = "resource_proto_cc",
+    deps = [":resource_proto"],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "metrics_proto",
+    srcs = [
+        "opentelemetry/proto/metrics/v1/metrics.proto",
+    ],
+    deps = [":common_proto", ":resource_proto"],
+    visibility = ["//visibility:public"],
+)
+
+cc_proto_library(
+    name = "metrics_proto_cc",
+    deps = [":metrics_proto"],
+    visibility = ["//visibility:public"],
+)
